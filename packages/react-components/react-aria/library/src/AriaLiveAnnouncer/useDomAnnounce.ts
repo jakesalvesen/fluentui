@@ -147,13 +147,19 @@ export const useDomAnnounce_unstable = (): AriaLiveAnnounceFn => {
 
     elementRef.current = element;
 
+    // Messages announced before the live region existed (for example from a child's mount effect, which runs before
+    // this one) are still queued, so start the queue now.
+    if (messageQueue.peek()) {
+      queueMessage();
+    }
+
     return () => {
       element.remove();
       elementRef.current = null;
       clearAnnounceTimeout();
       timeoutRef.current = undefined;
     };
-  }, [clearAnnounceTimeout, targetDocument]);
+  }, [clearAnnounceTimeout, messageQueue, queueMessage, targetDocument]);
 
   return announce;
 };

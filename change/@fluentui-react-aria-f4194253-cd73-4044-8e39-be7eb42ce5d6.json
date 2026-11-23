@@ -1,0 +1,6 @@
+{
+  "type": "patch",
+  "comment": "fix: AriaLiveAnnouncer announces a message from a child that is mounted together with it",
+  "packageName": "@fluentui/react-aria",
+  "email": "171317405+jakesalvesen@users.noreply.github.com"
+}
